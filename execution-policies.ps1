@@ -1,6 +1,6 @@
-# $user = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-# $userPrincipal = New-Object System.Security.Principal.WindowsPrincipal($user)
-# $isLocalUser = $userPrincipal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
+$user = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+$userPrincipal = New-Object System.Security.Principal.WindowsPrincipal($user)
+$isLocalUser = $userPrincipal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
 $Localuser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 
 $scriptPath = $PSScriptRoot + "\execution-policies.ps1"
@@ -10,9 +10,10 @@ $policy = Get-ExecutionPolicy CurrentUser
 # $user = Get-LocalUser
 Write-Host "`nThe Execution policy is $policy for users $Localuser"
 
-# if(! $isLocalUser){
-#     Write-Host "`nPlease RunAs with Administrator"
-# }
+if(! $isLocalUser){
+    Write-Host "`nPlease RunAs with Administrator"
+    exit(1)
+}
 
 # if($isLocalUser){
 #     Start-Process powershell -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $scriptPath"
