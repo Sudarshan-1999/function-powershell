@@ -9,7 +9,7 @@ class EmailSender {
 
     [void] SendEmail([string]$from, [string]$to, [string]$subject, [string]$body , [string]$attachment) {
         $smtpUsername = "sudarshan.damahe@rampgroup.com"
-        $smtpPassword = Read-host "Enter Password " -AsSecureString
+        $smtpPassword = read-host "Enter Password " -AsSecureString
         $smtpPort = 587
         $emailParams = @{
             From       = $from
